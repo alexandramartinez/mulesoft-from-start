@@ -1,12 +1,15 @@
-# MuleSoft from Start
+# MuleSoft from Start: A Beginner's Guide
 
 Everything discussed in the Twitch live sessions for MuleSoft beginners.
 
-## Sessions
+- Follow me on Twitch to see the live streams: [DevAlexMartinez](https://www.twitch.tv/devalexmartinez)
+- Or watch the recorded and edited (shorter) versions in [ProstDev's YouTube channel](https://www.youtube.com/prostdev)
 
-| Session | Title | Description | Links
-| - | - | - | - |
-| 0 | Planning session | tbd | tbd
+## Past Sessions
+
+| Session | Title | Description | Twitch | YouTube
+| - | - | - | - | - |
+| 0 | Planning the Outline | Based on the book `MuleSoft for Salesforce Developers`, we reviewed the relevant topics and created an appropriate outline for the upcoming sessions. | [Full video (55min)](https://www.twitch.tv/videos/1816506733) | [Edited video (38min)](https://youtu.be/xzi8peU87v0)
 
 ## Outline
 
