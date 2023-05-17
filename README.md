@@ -23,6 +23,7 @@ First session:
     - DataWeave
         - Extension for VSCode
         - Playground
+        - DataWeave CLI
 - Community overview
     - Ambassadors & Mentors
     - Meetups
