@@ -5,7 +5,7 @@ Everything discussed in the Twitch live sessions for MuleSoft beginners.
 - Follow me on Twitch to see the live streams: [DevAlexMartinez](https://www.twitch.tv/devalexmartinez)
 - Or watch the recorded and edited (shorter) versions in [ProstDev's YouTube channel](https://www.youtube.com/prostdev)
 
-## Next session
+## 🗓️ Next session
 
 The next session is scheduled for `June 14, 2023` at `1:30pm ET`.
 
@@ -18,7 +18,7 @@ What we'll learn:
 
 Watch it live here: [twitch.tv/devalexmartinez](https://www.twitch.tv/devalexmartinez) or wait a few days for the edited recording to be posted in [YouTube](https://www.youtube.com/prostdev).
 
-## Past Sessions
+## 💻 Past Sessions
 
 | Session | Title | Description | Twitch | YouTube
 | - | - | - | - | - |
@@ -26,7 +26,7 @@ Watch it live here: [twitch.tv/devalexmartinez](https://www.twitch.tv/devalexmar
 | 1 | MuleSoft Overview | We went through an overview of the different MuleSoft products and how to get involved with the community. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-1-mulesoft-overview-62fa9307ea2f). | [Full video (1h2min)](https://www.twitch.tv/videos/1822381945) | [Edited video (34min)](https://youtu.be/I6BWPoD639A)
 | 2 | What is an API? | We explained the API basics and learned what is MuleSoft's API-led connectivity approach. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-2-what-is-an-api-9a4602bbc51a). | [Full video (1h1m)](https://www.twitch.tv/videos/1840283988) | [Edited video (35min)](https://youtu.be/M4gYW2o9IKc)
 
-## Outline & Links
+## 📝 Outline & Links 🔗
 
 ### ✅ Session 1 - MuleSoft Overview
 
