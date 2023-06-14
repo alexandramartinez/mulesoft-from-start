@@ -1,0 +1,182 @@
+#%RAML 1.0
+types:
+  Category:
+    properties:
+      id:
+        example: 1
+        type: number
+        format: int
+      name:
+        example: Mental Health
+        type: string
+      articles?:
+        items:
+          type: Article
+  Error:
+    properties:
+      code:
+        example: 500
+        type: number
+        format: int
+      description:
+        example: There was an internal error. Nothing on your side tho!
+        type: string
+  Writer:
+    properties:
+      id:
+        example: 1
+        type: number
+        format: int
+      name:
+        example: Esmeralda
+        type: string
+      bio:
+        example: 20+ years of experience in IT and very smart.
+        type: string
+      articles?:
+        items:
+          type: Article
+  Comment:
+    properties:
+      id:
+        example: 1
+        type: number
+        format: int
+      content:
+        example: Hey, this was a nice post!
+        type: string
+      author:
+        example: Alex Martinez
+        type: string
+      articleId:
+        example: 1
+        type: number
+        format: int
+  Article:
+    description: This is what you read in the blog!
+    properties:
+      id:
+        example: 1
+        type: number
+        format: int
+      title:
+        example: The Importance of Regular Exercise
+        type: string
+      content:
+        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac est eu mauris faucibus consectetur. Nunc vehicula hendrerit nulla, non vulputate justo ultrices sit amet. Mauris varius lorem sit amet sem laoreet, id lacinia eros auctor. Donec tincidunt augue vel dolor pharetra tincidunt. Aliquam dapibus sed neque vitae sagittis. Sed sit amet nibh id nunc vehicula laoreet. Morbi fermentum auctor est, eu tempor tortor lobortis nec. Etiam tincidunt, lorem a viverra facilisis, nunc lorem aliquet magna, euismod ullamcorper ligula metus et augue.
+        type: string
+      writerId:
+        example: 1
+        type: number
+        format: int
+      categoryId?:
+        example: 1
+        type: number
+        format: int
+      comments?:
+        items:
+          type: Comment
+      slug:
+        example: importance-of-regular-exercise
+        type: string
+title: Blog API
+baseUri: /
+description: |
+  # Welcome to Maxine's Blog!
+
+  I hope you have fun!
+
+  ...and learn
+
+  ...stuff
+
+  -Maxine.
+mediaType:
+  - application/json
+version: 1.0.0
+protocols:
+  - HTTP
+  - HTTPS
+/articles:
+  get:
+    displayName: Articles
+    description: Read all my articles!
+    responses:
+      "200":
+        description: This is my article list!
+        body:
+          items:
+            type: Article
+      "500":
+        body:
+          type: Error
+      "404":
+        body:
+          type: Error
+          example:
+            strict: true
+            value:
+              code: 404
+              description: There are no articles to show
+  post:
+    responses:
+      "201":
+        body:
+          type: Article
+      "400":
+        body:
+          type: Error
+      "409":
+        body:
+          type: Error
+      "500":
+        body:
+          type: Error
+/articles/{slug}:
+  get:
+    responses:
+      "200":
+        body:
+          type: Article
+      "500":
+        body:
+          type: Error
+      "404":
+        body:
+          type: Error
+          example:
+            strict: true
+            value:
+              code: 404
+              description: There are no articles to show
+  delete:
+    responses:
+      "500":
+        body:
+          type: Error
+      "204": {}
+      "404":
+        body:
+          type: Error
+          example:
+            strict: true
+            value:
+              code: 404
+              description: There are no articles with this slug
+  put:
+    body:
+      type: Article
+    responses:
+      "200":
+        body:
+          type: Article
+      "500":
+        body:
+          type: Error
+      "400":
+        body:
+          type: Error
+  uriParameters:
+    slug:
+      example: importance-of-regular-exercise
+      type: string
