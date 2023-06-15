@@ -2,7 +2,7 @@
 
 ## Maxine's blog
 
-Resources are the nouns of our APIs -- stuff that we can use a *CRUD* operation on.
+Resources are the nouns of our APIs -- stuff we can use a *CRUD* operation on.
 
 **CRUD:**
 - C - Create
@@ -11,7 +11,6 @@ Resources are the nouns of our APIs -- stuff that we can use a *CRUD* operation 
 - D - Delete
 
 **List of resources:**
-- Blog *
 - Articles
 - Writers
 - Categories (for the articles)

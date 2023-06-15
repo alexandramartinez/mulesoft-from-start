@@ -1,84 +1,4 @@
 #%RAML 1.0
-types:
-  Category:
-    properties:
-      id:
-        example: 1
-        type: number
-        format: int
-      name:
-        example: Mental Health
-        type: string
-      articles?:
-        items:
-          type: Article
-  Error:
-    properties:
-      code:
-        example: 500
-        type: number
-        format: int
-      description:
-        example: There was an internal error. Nothing on your side tho!
-        type: string
-  Writer:
-    properties:
-      id:
-        example: 1
-        type: number
-        format: int
-      name:
-        example: Esmeralda
-        type: string
-      bio:
-        example: 20+ years of experience in IT and very smart.
-        type: string
-      articles?:
-        items:
-          type: Article
-  Comment:
-    properties:
-      id:
-        example: 1
-        type: number
-        format: int
-      content:
-        example: Hey, this was a nice post!
-        type: string
-      author:
-        example: Alex Martinez
-        type: string
-      articleId:
-        example: 1
-        type: number
-        format: int
-  Article:
-    description: This is what you read in the blog!
-    properties:
-      id:
-        example: 1
-        type: number
-        format: int
-      title:
-        example: The Importance of Regular Exercise
-        type: string
-      content:
-        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac est eu mauris faucibus consectetur. Nunc vehicula hendrerit nulla, non vulputate justo ultrices sit amet. Mauris varius lorem sit amet sem laoreet, id lacinia eros auctor. Donec tincidunt augue vel dolor pharetra tincidunt. Aliquam dapibus sed neque vitae sagittis. Sed sit amet nibh id nunc vehicula laoreet. Morbi fermentum auctor est, eu tempor tortor lobortis nec. Etiam tincidunt, lorem a viverra facilisis, nunc lorem aliquet magna, euismod ullamcorper ligula metus et augue.
-        type: string
-      writerId:
-        example: 1
-        type: number
-        format: int
-      categoryId?:
-        example: 1
-        type: number
-        format: int
-      comments?:
-        items:
-          type: Comment
-      slug:
-        example: importance-of-regular-exercise
-        type: string
 title: Blog API
 baseUri: /
 description: |
@@ -132,6 +52,25 @@ protocols:
       "500":
         body:
           type: Error
+    body:
+      properties:
+        title:
+          example: Example
+          type: string
+        content:
+          example: Example
+          type: string
+        writerId:
+          example: 1
+          type: number
+          format: int
+        categoryId?:
+          example: 1
+          type: number
+          format: int
+        slug:
+          example: Example
+          type: string
 /articles/{slug}:
   get:
     responses:
@@ -180,3 +119,83 @@ protocols:
     slug:
       example: importance-of-regular-exercise
       type: string
+types:
+  Category:
+    properties:
+      id:
+        example: 1
+        type: number
+        format: int
+      name:
+        example: Mental Health
+        type: string
+      articles?:
+        items:
+          type: Article
+  Error:
+    properties:
+      code:
+        example: 500
+        type: number
+        format: int
+      description:
+        example: There was an internal error. Nothing on your side tho!
+        type: string
+  Writer:
+    properties:
+      id:
+        example: 1
+        type: number
+        format: int
+      name:
+        example: Esmeralda
+        type: string
+      bio:
+        example: 20+ years of experience in IT and very smart.
+        type: string
+      articles?:
+        items:
+          type: Article
+  Article:
+    description: This is what you read in the blog!
+    properties:
+      id:
+        example: 1
+        type: number
+        format: int
+      title:
+        example: The Importance of Regular Exercise
+        type: string
+      content:
+        example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac est eu mauris faucibus consectetur. Nunc vehicula hendrerit nulla, non vulputate justo ultrices sit amet. Mauris varius lorem sit amet sem laoreet, id lacinia eros auctor. Donec tincidunt augue vel dolor pharetra tincidunt. Aliquam dapibus sed neque vitae sagittis. Sed sit amet nibh id nunc vehicula laoreet. Morbi fermentum auctor est, eu tempor tortor lobortis nec. Etiam tincidunt, lorem a viverra facilisis, nunc lorem aliquet magna, euismod ullamcorper ligula metus et augue.
+        type: string
+      writerId:
+        example: 1
+        type: number
+        format: int
+      categoryId?:
+        example: 1
+        type: number
+        format: int
+      comments?:
+        items:
+          type: Comment
+      slug:
+        example: importance-of-regular-exercise
+        type: string
+  Comment:
+    properties:
+      id:
+        example: 1
+        type: number
+        format: int
+      content:
+        example: Hey, this was a nice post!
+        type: string
+      author:
+        example: Alex Martinez
+        type: string
+      articleId:
+        example: 1
+        type: number
+        format: int
