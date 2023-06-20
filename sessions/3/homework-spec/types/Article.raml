@@ -1,0 +1,23 @@
+#%RAML 1.0 DataType
+
+properties:
+  id:
+    example: 1
+    type: number
+    format: int
+  title:
+    example: The Importance of Regular Exercise
+    type: string
+  content:
+    example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac est eu mauris faucibus consectetur. Nunc vehicula hendrerit nulla, non vulputate justo ultrices sit amet. Mauris varius lorem sit amet sem laoreet, id lacinia eros auctor. Donec tincidunt augue vel dolor pharetra tincidunt. Aliquam dapibus sed neque vitae sagittis. Sed sit amet nibh id nunc vehicula laoreet. Morbi fermentum auctor est, eu tempor tortor lobortis nec. Etiam tincidunt, lorem a viverra facilisis, nunc lorem aliquet magna, euismod ullamcorper ligula metus et augue.
+    type: string
+  writer:
+    type: !include Writer.raml
+  category?:
+    example: Example
+    type: string
+  comments?:
+    items: !include Comment.raml
+  slug:
+    example: importance-of-regular-exercise
+    type: string

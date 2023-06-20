@@ -1,0 +1,162 @@
+#%RAML 1.0
+title: Blog API
+mediaType: application/json
+version: 1.0.0
+
+types:
+  Error: !include types/Error.raml
+  Comment: !include types/Comment.raml
+  Writer: !include types/Writer.raml
+  Article: !include types/Article.raml
+  
+traits:
+  commonErrorResponses:
+    responses:
+      400:
+        body:
+          Error
+      500:
+        body:
+          Error
+
+/articles:
+  is:
+    - commonErrorResponses
+  get:
+    responses:
+      200:
+        body: Article[]
+      404:
+        body: Error
+  post:
+    body: Article
+    responses:
+      201:
+        body: Article
+      409:
+        body: Error
+  /{id}:
+    is:
+      - commonErrorResponses
+    uriParameters:
+      id:
+        example: 1
+        type: number
+        format: int
+    get:
+      responses:
+        200:
+          body: Article
+        404:
+          body: Error
+    put:
+      body: Article
+      responses:
+        200:
+          body: Article
+        404:
+          body: Error
+    delete:
+      responses:
+        204:
+        404:
+          body: Error
+    /comments:
+      is:
+        - commonErrorResponses
+      get:
+        responses:
+          200:
+            body: Article[]
+          404:
+            body: Error
+      post:
+        body: Article
+        responses:
+          201:
+            body: Article
+          409:
+            body: Error
+      /{id}:
+        is:
+          - commonErrorResponses
+        uriParameters:
+          id:
+            example: 1
+            type: number
+            format: int
+        get:
+          responses:
+            200:
+              body: Article
+            404:
+              body: Error
+        put:
+          body: Article
+          responses:
+            200:
+              body: Article
+            404:
+              body: Error
+        delete:
+          responses:
+            204:
+            404:
+              body: Error
+
+/writers:
+  is:
+    - commonErrorResponses
+  get:
+    responses:
+      200:
+        body: Writer[]
+      404:
+        body: Error
+  post:
+    body: Writer
+    responses:
+      201:
+        body: Writer
+      409:
+        body: Error
+  /{id}:
+    is:
+      - commonErrorResponses
+    uriParameters:
+      id:
+        example: 1
+        type: number
+        format: int
+    get:
+      responses:
+        200:
+          body: Writer
+        404:
+          body: Error
+    put:
+      body: Writer
+      responses:
+        200:
+          body: Writer
+        404:
+          body: Error
+    delete:
+      responses:
+        204:
+        404:
+          body: Error
+        409:
+          body: Error
+/categories:
+  is:
+    - commonErrorResponses
+  get:
+    queryParameters:
+      categoryName:
+        type: string
+    responses:
+      200:
+        body: string[]
+      404:
+        body: Error

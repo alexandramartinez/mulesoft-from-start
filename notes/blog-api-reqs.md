@@ -22,23 +22,17 @@ Resources are the nouns of our APIs -- stuff we can use a *CRUD* operation on.
     - slug
     - title
     - content
-    - writerId
-    - categoryId
+    - writer
+    - category
     - comments
 - writer
     - id
     - name
     - bio
-    - articles
-- category
-    - id
-    - name
-    - articles
 - comment
     - id
     - content
     - author
-    - articleId
 - error
     - code
     - description

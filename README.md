@@ -115,6 +115,57 @@ What we'll learn:
 
 </details>
 
+<details>
+<summary>Alex's homework solution</summary>
+
+Remember we can all have different API designs depending on what we are trying to achieve with our API. This is the solution that I created for what I believe is the correct design. But please feel free to send me a message if you have a different solution!
+
+Steps:
+
+1. I modified the data types we created in the last session. Updated requirements can be found [here](notes/blog-api-reqs.md).
+
+    a) `Article` data type:
+        
+       * writerId (number) -> writer (Writer)
+       * categoryId (number) -> category (string)
+
+    b) `Writer` data type:
+
+        * removed articles
+
+    c) `Category` data type was removed since it was transformed to just a string
+
+    d) `Comment` data type:
+
+        * removed articleId
+
+2. I created a new API Specification using `RAML 1.0` instead of the visual UI. This will make it easier moving forward for us to compare each other's results.
+
+3. Inside this new API Spec, I created a `types` folder with our data types:
+
+    * Article
+    * Comment
+    * Error
+    * Writer
+
+4. The final resources I created are as folows:
+
+    ```
+    /articles
+    /articles/{id}
+    /articles/{id}/comments
+    /articles/{id}/comments/{id}
+    /writers
+    /writers/{id}
+    /categories
+    ```
+
+5. I decided to use a query parameter on the `/categories` resource to query if a specific category (string) exists or not. A similar approach would be done with the comments. If you don't want to have such a long URI like `/articles/1/comments/1`, you can also decide to use query parameters instead. This is completely up to your design/preference.
+
+6. Finally, the whole code I generated can be found [here](sessions/3/homework-spec/). You can decide to use this design to continue with the rest of the sessions, or continue with your own API spec!
+
+</details>
+
 ### ◻️ Session 4
 
 - Design an API
