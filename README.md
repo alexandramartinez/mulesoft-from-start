@@ -108,7 +108,11 @@ What we'll learn:
     - Create API
 - [This](/sessions/3/in-session-spec.raml) is the RAML we generated during the session.
 
-**Homework**
+</details>
+
+
+<details>
+<summary>Homework for next session</summary>
 
 - Finish creating the API Specification with the resources we didn't get to create during the session: `Writers`, `Categories`, and `Comments`.
 - The solution will be added to this repo before the next session.
