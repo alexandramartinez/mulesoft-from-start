@@ -168,6 +168,8 @@ Steps:
 
 6. Finally, the whole code I generated can be found [here](sessions/3/homework-spec/). You can decide to use this design to continue with the rest of the sessions, or continue with your own API spec!
 
+![](sessions/3/homework-spec/session3-resources.png)
+
 </details>
 
 ### ◻️ Session 4
