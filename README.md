@@ -9,7 +9,7 @@ Everything discussed in the Twitch live sessions for MuleSoft beginners.
 
 ## 🗓️ Next session
 
-The next session is scheduled for `June 28, 2023` at `1:30pm ET`.
+The next session is scheduled for `June 28, 2023` at `2pm ET`.
 
 What we'll learn:
 - Review our homework from the last session
