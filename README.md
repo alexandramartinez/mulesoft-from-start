@@ -9,15 +9,17 @@ Everything discussed in the Twitch live sessions for MuleSoft beginners.
 
 ## 🗓️ Next session
 
-The next session is scheduled for `June 28, 2023` at `1:30pm ET`.
+The next session is scheduled for `July 5, 2023` at `1:30pm ET`.
 
 What we'll learn:
-- Review our homework from the last session
-- Design an API
-    - Test with the Mocking Service
-    - Publish to Exchange
-- Implement an API in Studio
-    - Core components
+- Introduction to Anypoint Studio
+  - The UI
+  - The Mule Palette
+  - Project's structure
+- Mule project's best practices
+  - Global Elements
+  - Properties
+- Initial API implementation
 
 ---
 
@@ -172,16 +174,37 @@ Steps:
 
 </details>
 
-### ◻️ Session 4
+### ✅ Session 4
 
-- Design an API
-    - Test with the Mocking Service
-    - Publish to Exchange
-- Implement an API in Studio
-    - Core components
-- Briefffff summary of ACB (BETA)
+<details>
+<summary>Publish an API Specification</summary>
+
+- Step 1: Test your API Spec using the mocking service (adjust spec if needed)
+  - See [sessions/4/in-session-spec.raml](sessions/4/in-session-spec.raml) for what we adjusted during the session
+- Step 2: Publish to Exchange
+- Step 3: Create a new Mule project in Studio, importing the API Spec from Exchange to scaffold the flows
+  - See [sessions/4/studio-project](sessions/4/in-session-mule-project/) for the project we created during the session
+
+**Other resources**
+
+- [MuleSoft Anypoint Studio Installation with Digital Dee](https://youtu.be/cyv3XBxctxM)
+- [Download Anypoint Studio](https://www.mulesoft.com/platform/studio)
+- [Anypoint Studio docs](https://docs.mulesoft.com/studio/latest/)
+
+</details>
 
 ### ◻️ Session 5
+
+- Introduction to Anypoint Studio
+  - The UI
+  - The Mule Palette
+  - Project's structure
+- Mule project's best practices
+  - Global Elements
+  - Properties
+- Initial API implementation
+
+### ◻️ Session 6
 
 - Deploy API to CloudHub - manually
 - Runtime Manager
@@ -190,11 +213,11 @@ Steps:
     - Maven
     - Secured/encrypted properties
 
-### ◻️ Session 6
+### ◻️ Session 7
 
 - DataWeave
 
-### ◻️ Session 7
+### ◻️ Session 8
 
 - MUnit manually
 - MUnit CI/CD
