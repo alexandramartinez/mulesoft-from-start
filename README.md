@@ -9,17 +9,18 @@ Everything discussed in the Twitch live sessions for MuleSoft beginners.
 
 ## 🗓️ Next session
 
-The next session is scheduled for `July 5, 2023` at `1:30pm ET`.
+The next session is scheduled for `July 19, 2023` at `1:30pm ET`.
 
-What we'll learn:
-- Introduction to Anypoint Studio
-  - The UI
-  - The Mule Palette
-  - Project's structure
-- Mule project's best practices
-  - Global Elements
-  - Properties
-- Initial API implementation
+> Note: Homework solution from session 5 will be added to the repo before July 12.
+
+What we'll do:
+- Homework review
+- Deploy API to CloudHub - manually
+- Runtime Manager
+- API Manager
+- CI/CD with GitHub Actions
+  - Maven
+  - Secured/encrypted properties?
 
 ---
 
@@ -32,6 +33,7 @@ What we'll learn:
 | 2 | What is an API? | We explained the API basics and learned what is MuleSoft's API-led connectivity approach. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-2-what-is-an-api-9a4602bbc51a). | [Full video (1h1m)](https://www.twitch.tv/videos/1840283988) | [Edited video (35min)](https://youtu.be/M4gYW2o9IKc)
 | 3 | Design an API Specification | We created the requirements for our Blog API and started designing our API Spec. Finish your homework before the next session! More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-3-design-an-api-specification-2a315899f22f). | [Full video (1h16m)](https://www.twitch.tv/videos/1846281214) | [Edited video (42min)](https://youtu.be/XIrCqwmTPQs)
 | 4 | Test & Publish the API Spec | We tested the API Specification using the mocking service in Design Center and adjusted a few things we had to change. Then, we published the API Spec to Exchange. Finally, we created a new Mule project from the published asset. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-4-test-publish-the-api-specification-7dcca81e0b07). | [Full video (1h10m)](https://www.twitch.tv/videos/1858212063) | [Edited video (27min)](https://youtu.be/ho5GQJD8Hxo)
+| 5 | Develop the API in Anypoint Studio | We created a new Mule project with the scaffolded flows from the published API specification and started our API implementation / development. | [Full video (1h19m)](https://www.twitch.tv/videos/1864154096) | [Edited video tbd]
 
 ---
 
@@ -194,16 +196,44 @@ Steps:
 
 </details>
 
-### ◻️ Session 5
+### ✅ Session 5
 
-- Introduction to Anypoint Studio
-  - The UI
-  - The Mule Palette
-  - Project's structure
-- Mule project's best practices
-  - Global Elements
-  - Properties
-- Initial API implementation
+<details>
+<summary>Develop the API in Anypoint Studio</summary>
+
+- Step 1: Scaffold the flows in Studio from the API Specification we had published to Exchange (we did this at the end of session 4)
+- Step 2: Move the Global Elements from `maxines-blog-api.xml` to a new `global.xml` file
+- Step 3: Create the `local.properties` and `dev.properties` to keep separate properties per environment (you can also use .yaml)
+- Step 4: Add a Global Property `env` with the value `local`
+- Step 5: Add a Configuration Properties for the file `${env}.properties`
+- Step 6: Create the `default.properties` file and its Configuration to keep the common values
+- Step 7: Start the API implementation using Object Store (you can also connect to a database or an external service if you want)
+- [This](sessions/5/in-session-mule-project/) is the project we generated during the session
+
+**Other resources**
+
+- [Object Store v2 Overview](https://docs.mulesoft.com/object-store/)
+- [DataWeave Playground](https://dataweave.mulesoft.com/learn/playground)
+
+</details>
+
+<details>
+<summary>Homework for next session</summary>
+
+- Create new Mule Configuration Files to keep each resources' logic separate from the main `maxines-blog-api.xml` file
+- Add subflows inside these new config files instead of flows
+- Reference these new subflows from the main flows from the APIKit router
+- Finish creating the logic for the rest of the resources (we just did `articles` in this session)
+- Improve the code to avoid duplicating the same code (like we do with the Retrieve connector named `GET articles`) -- this helps to avoid human mistake
+
+</details>
+
+<details>
+<summary>Alex's homework solution</summary>
+
+Will be added before July 12
+
+</details>
 
 ### ◻️ Session 6
 
