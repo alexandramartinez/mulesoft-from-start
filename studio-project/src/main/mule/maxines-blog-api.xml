@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
-    <http:listener-config name="maxines-blog-api-httpListenerConfig">
-        <http:listener-connection host="0.0.0.0" port="8081" />
-    </http:listener-config>
-    <apikit:config name="maxines-blog-api-config" api="resource::25cebd62-2548-4351-8196-5a262e78e663:maxines-blog-api:1.0.0:raml:zip:maxines-blog-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
     <flow name="maxines-blog-api-main">
         <http:listener config-ref="maxines-blog-api-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -96,34 +93,7 @@ output application/json
             </on-error-propagate>
         </error-handler>
     </flow>
-    <flow name="maxines-blog-api-console">
-        <http:listener config-ref="maxines-blog-api-httpListenerConfig" path="/console/*">
-            <http:response statusCode="#[vars.httpStatus default 200]">
-                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
-            </http:response>
-            <http:error-response statusCode="#[vars.httpStatus default 500]">
-                <http:body>#[payload]</http:body>
-                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
-            </http:error-response>
-        </http:listener>
-        <apikit:console config-ref="maxines-blog-api-config" />
-        <error-handler>
-            <on-error-propagate type="APIKIT:NOT_FOUND">
-                <ee:transform doc:name="Transform Message">
-                    <ee:message>
-                        <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{message: "Resource not found"}]]></ee:set-payload>
-                    </ee:message>
-                    <ee:variables>
-                        <ee:set-variable variableName="httpStatus">404</ee:set-variable>
-                    </ee:variables>
-                </ee:transform>
-            </on-error-propagate>
-        </error-handler>
-    </flow>
-    <flow name="put:\articles\(articleId):application\json:maxines-blog-api-config">
+	<flow name="put:\articles\(articleId):application\json:maxines-blog-api-config">
         <ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="articleId">attributes.uriParams.'articleId'</ee:set-variable>
@@ -131,7 +101,7 @@ output application/json
         </ee:transform>
         <logger level="INFO" message="put:\articles\(articleId):application\json:maxines-blog-api-config" />
     </flow>
-    <flow name="put:\articles\(articleId)\comments\(commentId):application\json:maxines-blog-api-config">
+	<flow name="put:\articles\(articleId)\comments\(commentId):application\json:maxines-blog-api-config">
         <ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="articleId">attributes.uriParams.'articleId'</ee:set-variable>
@@ -139,9 +109,6 @@ output application/json
             </ee:variables>
         </ee:transform>
         <logger level="INFO" message="put:\articles\(articleId)\comments\(commentId):application\json:maxines-blog-api-config" />
-    </flow>
-    <flow name="get:\articles:maxines-blog-api-config">
-        <logger level="INFO" message="get:\articles:maxines-blog-api-config" />
     </flow>
 	<flow name="put:\writers\(writerId):application\json:maxines-blog-api-config">
         <ee:transform doc:name="Transform Message">
@@ -151,7 +118,7 @@ output application/json
         </ee:transform>
         <logger level="INFO" message="put:\writers\(writerId):application\json:maxines-blog-api-config" />
     </flow>
-    <flow name="delete:\articles\(articleId):maxines-blog-api-config">
+	<flow name="delete:\articles\(articleId):maxines-blog-api-config">
         <ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="articleId">attributes.uriParams.'articleId'</ee:set-variable>
@@ -176,7 +143,7 @@ output application/json
         </ee:transform>
         <logger level="INFO" message="delete:\writers\(writerId):maxines-blog-api-config" />
     </flow>
-    <flow name="get:\categories:maxines-blog-api-config">
+	<flow name="get:\categories:maxines-blog-api-config">
         <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
@@ -189,7 +156,14 @@ output application/json
             </ee:message>
         </ee:transform>
     </flow>
-    <flow name="get:\articles\(articleId)\comments:maxines-blog-api-config">
+    <flow name="get:\articles:maxines-blog-api-config">
+        <logger level="INFO" message="Starting GET /articles" doc:name="START" />
+		<os:retrieve doc:name="GET articles" doc:id="d86a63ee-6e86-4301-b189-2c79f606f52c" key="#[Mule::p('os.articles')]" objectStore="Object_store" >
+			<os:default-value ><![CDATA[#[output application/json --- []]]]></os:default-value>
+		</os:retrieve>
+		<logger level="INFO" doc:name="END" doc:id="be2cfaf5-dd3f-473f-97dc-2f46323b9230" message="Ending GET /articles" />
+    </flow>
+	<flow name="get:\articles\(articleId)\comments:maxines-blog-api-config">
         <ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="articleId">attributes.uriParams.'articleId'</ee:set-variable>
@@ -226,7 +200,21 @@ output application/json
         <logger level="INFO" message="get:\writers\(writerId):maxines-blog-api-config" />
     </flow>
     <flow name="post:\articles:application\json:maxines-blog-api-config">
-        <logger level="INFO" message="post:\articles:application\json:maxines-blog-api-config" />
+        <logger level="INFO" message="Starting POST /articles" doc:name="START"/>
+		<os:retrieve doc:name="articles" doc:id="86c79bf7-248f-452d-afde-1f5605d69937" key="#[Mule::p('os.articles')]" objectStore="Object_store" target="articles">
+			<os:default-value ><![CDATA[#[output application/json --- []]]]></os:default-value>
+		</os:retrieve>
+		<ee:transform doc:name="append new article" doc:id="db752066-af0c-4635-9f1f-9340d20aef67" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+(vars.articles default []) + payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<os:store doc:name="new article to 'articles'" doc:id="92d29f4d-58d7-4130-924b-32df7ae1be16" key="#[Mule::p('os.articles')]" objectStore="Object_store"/>
+		<remove-variable doc:name="articles" doc:id="72fe56a1-3265-4982-a670-98eaaebd0459" variableName="articles"/>
+		<logger level="INFO" doc:name="END" doc:id="0fefc982-dc69-4f25-bf9b-0b7ebbec86e2" message="Ending GET /articles"/>
     </flow>
     <flow name="post:\articles\(articleId)\comments:application\json:maxines-blog-api-config">
         <ee:transform doc:name="Transform Message">
