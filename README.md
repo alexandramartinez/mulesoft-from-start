@@ -209,6 +209,7 @@ Steps:
 - Step 6: Create the `default.properties` file and its Configuration to keep the common values
 - Step 7: Start the API implementation using Object Store (you can also connect to a database or an external service if you want)
 - [This](sessions/5/in-session-mule-project/) is the project we generated during the session
+- To see all the changes to the Mule project in this session, refer to this commit: https://github.com/alexandramartinez/mulesoft-from-start/commit/fa444df4bfd62d25a1a6d9f2e0d2d8ea7f82d3ba
 
 **Other resources**
 
