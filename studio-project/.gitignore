@@ -45,3 +45,5 @@ target/
 .mule/
 .DS_Store
 velocity.log
+src/main/resources/application-types.xml
+src/main/resources/weave

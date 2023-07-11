@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
-	<sub-flow name="resources-categories:read-categories" doc:id="b26e5333-1761-4083-ae86-62f258596f1d" />
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="resources-categories:read-categories" doc:id="b26e5333-1761-4083-ae86-62f258596f1d" >
+		<ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+[
+  "MuleSoft", 
+  "DataWeave"
+]]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+	</sub-flow>
 	<sub-flow name="resources-categories:create-or-update-categories" doc:id="427c1b69-c008-40bb-be5a-81ca0c2dcca2" />
 	<sub-flow name="resources-categories:delete-categories" doc:id="042195a4-3ea0-4e90-b9b8-31657ea7e522" />
 </mule>

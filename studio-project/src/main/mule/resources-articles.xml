@@ -1,11 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
-	<sub-flow name="resources-articles:read-all-articles" doc:id="1d1fb2e0-ab63-4096-b345-dbbe89ab72ac" />
-	<sub-flow name="resources-articles:read-one-article" doc:id="d3e19990-3e91-4f34-a30b-f4846fb2cba0" />
-	<sub-flow name="resources-articles:create-one-article" doc:id="e0256288-a947-4889-95b6-9032a4801ee6" />
-	<sub-flow name="resources-articles:update-one-article" doc:id="4cd441f5-4cfd-4f0a-9558-8e0a3a694a49" />
-	<sub-flow name="resources-articles:delete-one-article" doc:id="25e8c955-1a60-4f91-8eae-306d3ff807c1" />
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+	<sub-flow name="resources-articles:read-all-articles" doc:id="1d1fb2e0-ab63-4096-b345-dbbe89ab72ac" >
+		<logger level="INFO" message="Starting GET /articles" doc:name="START" />
+        <os:retrieve doc:name="GET articles" doc:id="c2fc42b5-7263-4168-b6b2-d285e226120c" key="#[Mule::p('os.articles')]" objectStore="Object_store">
+            <os:default-value><![CDATA[#[output application/json --- []]]]></os:default-value>
+        </os:retrieve>
+		<logger level="INFO" doc:name="END" doc:id="62d77fa3-0d6c-41cb-9197-bb17e485a1f1" message="Ending GET /articles" />
+	</sub-flow>
+	<sub-flow name="resources-articles:read-one-article" doc:id="d3e19990-3e91-4f34-a30b-f4846fb2cba0" >
+		<ee:transform doc:name="articleId">
+            <ee:variables>
+                <ee:set-variable variableName="articleId">attributes.uriParams.'articleId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+	</sub-flow>
+	<sub-flow name="resources-articles:create-one-article" doc:id="e0256288-a947-4889-95b6-9032a4801ee6" >
+		<logger level="INFO" message="Starting POST /articles" doc:name="START" />
+        <os:retrieve doc:name="articles" doc:id="cbe6aadf-7c5c-453a-939f-790288574107" key="#[Mule::p('os.articles')]" objectStore="Object_store" target="articles">
+            <os:default-value><![CDATA[#[output application/json --- []]]]></os:default-value>
+        </os:retrieve>
+        <ee:transform doc:name="append new article" doc:id="4960e8e3-d821-4de5-8741-ce6bfedaf019">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+(vars.articles default []) + payload]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+        <os:store doc:name="new article to 'articles'" doc:id="a54ad9dc-93f9-469d-9033-8f270e8cc5f5" key="#[Mule::p('os.articles')]" objectStore="Object_store" />
+        <remove-variable doc:name="articles" doc:id="8ae1e544-dcf1-4424-9a2f-67a91e0fdf3a" variableName="articles" />
+        <logger level="INFO" doc:name="END" doc:id="cc48fe05-46c9-4d13-ae5b-1aba47e10964" message="Ending GET /articles" />
+	</sub-flow>
+	<sub-flow name="resources-articles:update-one-article" doc:id="4cd441f5-4cfd-4f0a-9558-8e0a3a694a49" >
+		<ee:transform doc:name="articleId">
+            <ee:variables>
+                <ee:set-variable variableName="articleId">attributes.uriParams.'articleId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+	</sub-flow>
+	<sub-flow name="resources-articles:delete-one-article" doc:id="25e8c955-1a60-4f91-8eae-306d3ff807c1" >
+		<ee:transform doc:name="articleId">
+            <ee:variables>
+                <ee:set-variable variableName="articleId">attributes.uriParams.'articleId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+	</sub-flow>
 </mule>
