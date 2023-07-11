@@ -233,7 +233,7 @@ Steps:
 
 Remember we can all have different solutions. You don't have to do exactly what I do. This is just to guide you or give you a better idea of what other solutions you can implement.
 
-You can see the full list of changes I did for this homework in [this Pull Request](https://github.com/alexandramartinez/mulesoft-from-start/pull/1/files)
+> You can see the full list of changes I did for this homework in [this Pull Request](https://github.com/alexandramartinez/mulesoft-from-start/pull/1/files)
 
 Since this solution is a bit bigger, I'll break this down in stages.
 
