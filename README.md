@@ -11,16 +11,15 @@ Everything discussed in the Twitch live sessions for MuleSoft beginners.
 
 The next session is scheduled for `July 19, 2023` at `1:30pm ET`.
 
-> Note: Homework solution from session 5 will be added to the repo before July 12.
-
 What we'll do:
 - Homework review
-- Deploy API to CloudHub - manually
-- Runtime Manager
-- API Manager
-- CI/CD with GitHub Actions
-  - Maven
-  - Secured/encrypted properties?
+- Continue with the implementation for the rest of the resources
+  - Making sure the IDs are unique
+  - Handle errors (not just happy path)
+  - Create writers, categories, etc. from POST/articles when needed
+- Postman collections
+- Debugging
+- Fixing errors
 
 ---
 
@@ -224,7 +223,7 @@ Steps:
 - Create new Mule Configuration Files to keep each resources' logic separate from the main `maxines-blog-api.xml` file
 - Add subflows inside these new config files instead of flows
 - Reference these new subflows from the main flows from the APIKit router
-- Finish creating the logic for the rest of the resources (we just did `articles` in this session)
+- Finish creating the logic for the `articles` resource (happy path)
 - Improve the code to avoid duplicating the same code (like we do with the Retrieve connector named `GET articles`) -- this helps to avoid human mistake
 
 </details>
@@ -232,11 +231,180 @@ Steps:
 <details>
 <summary>Alex's homework solution</summary>
 
-Will be added before July 12
+Remember we can all have different solutions. You don't have to do exactly what I do. This is just to guide you or give you a better idea of what other solutions you can implement.
+
+Since this solution is a bit bigger, I'll break this down in stages.
+
+**Stage 1: Updating the RAML**
+
+Steps:
+
+1. I decided to add a `POST` and a `DELETE` to the `/categories` resource. To do this, I went back to Design Center and implemented those two methods in the RAML.
+
+    ```raml
+    /categories:
+        
+        post:
+            body:
+            type: string[]
+            example:
+                ["Programming"]
+            responses:
+            201:
+                body: 
+                type: string[]
+                example:
+                    ["MuleSoft", "DataWeave", "Programming"]
+            409:
+                body: Error
+        delete:
+            body:
+            type: string[]
+            example:
+                ["DataWeave"]
+            responses:
+            204:
+            404:
+                body: Error
+            409:
+                body: Error
+    ```
+
+2. I also updated the version in the RAML (should be at the top).
+
+    ```raml
+    version: 1.0.2
+    ```
+
+3. After that, I published these changes to the Exchange asset just by clicking the `Publish` button at the top-right.
+
+4. Once the changes are in Exchange, I went back to Anypoint Studio and selected `Maxine's Blog API` > `Update version`.
+
+    ![](images/session5-image1.png)
+
+5. You can click on the `check for updates` button at the top-right of the new window to reflect the latest version. Make sure you are signed in to your Anypoint Platform account, otherwise you might have issues updating.
+
+6. A workaround to this, if you experience a lot of issues with updating via the UI, is to go to your `pom.xml` and manually update the version in the dependencies. For example, this is how it looks like in my project:
+
+    ```xml
+    <dependency>
+        <groupId>25cebd62-2548-4351-8196-5a262e78e663</groupId>
+        <artifactId>maxines-blog-api</artifactId>
+        <version>1.0.2</version>
+        <classifier>raml</classifier>
+        <type>zip</type>
+    </dependency>
+    ```
+
+7. The UI should ask you if you want to add the new flows. You can say yes to do the scaffolding for those flows. The rest of your flows should remain untouched.
+
+8. By this point, Studio correctly generated the two new flows for me: 
+   - `delete:\categories:application\json:maxines-blog-api-config`  
+   - `post:\categories:application\json:maxines-blog-api-config`
+
+**Stage 2: Creating new Mule Configuration Files per resource**
+
+Steps:
+
+1. I created the following files:
+
+    - `resources-articles.xml`
+    - `resources-categories.xml`
+    - `resources-comments.xml`
+    - `resources-writers.xml`
+
+2. Inside these files, I created a sub-flow per HTTP Method. For example, the `resources-articles` file has the following sub-flows (note that these have some naming conventions that I decided to follow, like `<config-file-name>:<flow-name>`, but you can name them however you prefer):
+
+    - `resources-articles:read-all-articles`
+    - `resources-articles:read-one-article`
+    - `resources-articles:create-one-article`
+    - `resources-articles:update-one-article`
+    - `resources-articles:delete-one-article`
+
+3. Then, I added flow-refs to all the flows in `maxines-blog-api.xml` so the logic can live inside the new config files I created.
+
+4. Now I can directly modify the logic from the Mule Configuration Files instead of having to navigate through the huge main file. 
+
+> NOTE: If you leave any of the flows or subflows empty, the application will not run. Make sure you add at least one logger (for example) to be able to run the app to test.
+
+**Stage 3: Creating the logic for the `articles` resource**
+
+Steps:
+
+1. Created four sub-flows to be reused by the rest of the flows.
+
+    ![](images/session5-image2.png)
+
+2. Improved the logic to read all articles to reference the new `resources-articles:retrieve-all-articles-in-vars.articles` sub-flow.
+
+    ![](images/session5-image3.png)
+
+3. Created the logic to read one article by filtering the list of articles using DataWeave (Transform Message).
+
+    ![](images/session5-image4.png)
+
+    Code:
+
+    ```dataweave
+    %dw 2.0
+    output application/json
+    ---
+    (vars.articles default [] filter ($.id ~= vars.articleId))[0]
+    ```
+
+4. Updated the logic to create one article.
+
+    ![](images/session5-image5.png)
+
+5. Created the logic to update one article and used DataWeave to update the data.
+
+    ![](images/session5-image6.png)
+
+    Code:
+
+    ```dataweave
+    %dw 2.0
+    output application/json
+    ---
+    vars.articles default [] map (
+        if ($.id ~= vars.articleId)
+            payload
+        else $
+    )
+    ```
+
+6. Created the logic to delete one article by filtering out the article by the `articleId` using DataWeave.
+
+    ![](images/session5-image7.png)
+
+    Code:
+
+    ```dataweave
+    %dw 2.0
+    output application/json
+    ---
+    vars.articles default [] filter ($.id != vars.articleId)
+    ```
+
+    > Note that for this last one we had to make sure the `articleId` variable was indeed a Number and not a String. The URI Parameters or the Query Parameters are usually of type String. You need to use further DataWeave code to transform it to a Number when applicable. In this case, we used the following code when we create the variable:
+
+    ```dataweave
+    attributes.uriParams.'articleId' as Number
+    ```
 
 </details>
 
 ### ◻️ Session 6
+
+- Continue with the implementation for the rest of the resources
+  - Making sure the IDs are unique
+  - Handle errors (not just happy path)
+  - Create writers, categories, etc. from POST/articles when needed
+- Postman collections
+- Debugging
+- Fixing errors
+
+### ◻️ Session 7
 
 - Deploy API to CloudHub - manually
 - Runtime Manager
@@ -245,11 +413,11 @@ Will be added before July 12
     - Maven
     - Secured/encrypted properties
 
-### ◻️ Session 7
+### ◻️ Session 8
 
 - DataWeave
 
-### ◻️ Session 8
+### ◻️ Session 9
 
 - MUnit manually
 - MUnit CI/CD
