@@ -392,6 +392,8 @@ Steps:
     attributes.uriParams.'articleId' as Number
     ```
 
+You can see the full list of changes I did for this homework in [this Pull Request](https://github.com/alexandramartinez/mulesoft-from-start/pull/1/files)
+
 </details>
 
 ### ◻️ Session 6
