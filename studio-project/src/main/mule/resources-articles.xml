@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<sub-flow name="resources-articles:read-all-articles" doc:id="1d1fb2e0-ab63-4096-b345-dbbe89ab72ac" />
+	<sub-flow name="resources-articles:read-one-article" doc:id="d3e19990-3e91-4f34-a30b-f4846fb2cba0" />
+	<sub-flow name="resources-articles:create-one-article" doc:id="e0256288-a947-4889-95b6-9032a4801ee6" />
+	<sub-flow name="resources-articles:update-one-article" doc:id="4cd441f5-4cfd-4f0a-9558-8e0a3a694a49" />
+	<sub-flow name="resources-articles:delete-one-article" doc:id="25e8c955-1a60-4f91-8eae-306d3ff807c1" />
+</mule>
