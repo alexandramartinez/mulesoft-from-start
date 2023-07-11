@@ -17,6 +17,10 @@ output application/json
             </ee:message>
         </ee:transform>
 	</sub-flow>
-	<sub-flow name="resources-categories:create-or-update-categories" doc:id="427c1b69-c008-40bb-be5a-81ca0c2dcca2" />
-	<sub-flow name="resources-categories:delete-categories" doc:id="042195a4-3ea0-4e90-b9b8-31657ea7e522" />
+	<sub-flow name="resources-categories:create-or-update-categories" doc:id="427c1b69-c008-40bb-be5a-81ca0c2dcca2" >
+		<logger level="INFO" doc:name="Logger" doc:id="780f2f83-c516-45fa-b604-8a2fe544e16f" />
+	</sub-flow>
+	<sub-flow name="resources-categories:delete-categories" doc:id="042195a4-3ea0-4e90-b9b8-31657ea7e522" >
+		<logger level="INFO" doc:name="Logger" doc:id="1c1627a2-02a0-4c15-94a5-9b0917b55f9c" />
+	</sub-flow>
 </mule>
