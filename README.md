@@ -9,17 +9,15 @@ Everything discussed in the Twitch live sessions for MuleSoft beginners.
 
 ## 🗓️ Next session
 
-The next session is scheduled for `July 19, 2023` at `1:30pm ET`.
+The next session is scheduled for `July 26, 2023` at `1:30pm ET`.
 
-What we'll do:
-- Homework review
 - Continue with the implementation for the rest of the resources
-  - Making sure the IDs are unique
-  - Handle errors (not just happy path)
-  - Create writers, categories, etc. from POST/articles when needed
-- Postman collections
-- Debugging
-- Fixing errors
+    - Making sure the IDs are unique
+    - Handle errors (not just happy path)
+    - Create writers, categories, etc. from POST/articles when needed
+- Deploy API to CloudHub - manually
+- Runtime Manager
+- API Manager
 
 ---
 
@@ -33,6 +31,7 @@ What we'll do:
 | 3 | Design an API Specification | We created the requirements for our Blog API and started designing our API Spec. Finish your homework before the next session! More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-3-design-an-api-specification-2a315899f22f). | [Full video (1h16m)](https://www.twitch.tv/videos/1846281214) | [Edited video (42min)](https://youtu.be/XIrCqwmTPQs)
 | 4 | Test & Publish the API Spec | We tested the API Specification using the mocking service in Design Center and adjusted a few things we had to change. Then, we published the API Spec to Exchange. Finally, we created a new Mule project from the published asset. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-4-test-publish-the-api-specification-7dcca81e0b07). | [Full video (1h10m)](https://www.twitch.tv/videos/1858212063) | [Edited video (27min)](https://youtu.be/ho5GQJD8Hxo)
 | 5 | Develop the API in Anypoint Studio | We created a new Mule project with the scaffolded flows from the published API specification and started our API implementation / development. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-5-develop-the-api-in-anypoint-studio-a7dcfc43655c). | [Full video (1h19m)](https://www.twitch.tv/videos/1864154096) | [Edited video (37m)](https://youtu.be/K9ntwKz9vds)
+| 6 | Debug the Mule App in Anypoint Studio | We reviewed how to implement the articles logic, created a Postman collection with its local+dev environments, and learned how to debug our Mule application. | [Full video (1h)](https://www.twitch.tv/videos/1876220306) | Edited video tbd
 
 ---
 
@@ -396,27 +395,45 @@ Steps:
 
 </details>
 
-### ◻️ Session 6
+### ✅ Session 6
 
-- Continue with the implementation for the rest of the resources
-  - Making sure the IDs are unique
-  - Handle errors (not just happy path)
-  - Create writers, categories, etc. from POST/articles when needed
-- Postman collections
-- Debugging
-- Fixing errors
+<details>
+<summary>Debug the Mule App in Anypoint Studio</summary>
+
+- [Mule Events](https://docs.mulesoft.com/mule-runtime/4.4/about-mule-event)
+- [Postman](https://www.postman.com/)
+
+</details>
+
+<details>
+<summary>Homework for next session</summary>
+
+Finish creating the rest of the requests in Postman from our API specification.
+
+</details>
+
+<details>
+<summary>Alex's homework solution</summary>
+
+tbd before the next session
+
+</details>
 
 ### ◻️ Session 7
 
+- Continue with the implementation for the rest of the resources
+    - Making sure the IDs are unique
+    - Handle errors (not just happy path)
+    - Create writers, categories, etc. from POST/articles when needed
 - Deploy API to CloudHub - manually
 - Runtime Manager
 - API Manager
-- CI/CD with GitHub Actions
-    - Maven
-    - Secured/encrypted properties
 
 ### ◻️ Session 8
 
+- CI/CD with GitHub Actions
+    - Maven
+    - Secured/encrypted properties
 - DataWeave
 
 ### ◻️ Session 9
