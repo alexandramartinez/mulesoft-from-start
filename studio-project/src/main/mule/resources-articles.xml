@@ -45,7 +45,7 @@ output application/json
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-(vars.articles default [] filter ($.id ~= vars.articleId))[0]]]></ee:set-payload>
+(vars.articles default [] filter ($.id ~= vars.articleId))[0] default {}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 		<logger level="INFO" doc:name="END" doc:id="18a0a918-8a03-4c2b-9c21-ee886eac890e" message="Ending resources-articles:read-one-article" />
