@@ -402,7 +402,7 @@ Steps:
 
 - [Mule Events](https://docs.mulesoft.com/mule-runtime/4.4/about-mule-event)
 - [Postman](https://www.postman.com/)
-- See the changes we did to the repo in this session: [Pull Request #2](https://github.com/alexandramartinez/mulesoft-from-start/pull/2)
+- See the changes we did to the repo in this session: [Pull Request #2](https://github.com/alexandramartinez/mulesoft-from-start/pull/2/files)
 
 </details>
 
