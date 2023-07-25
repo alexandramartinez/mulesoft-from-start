@@ -31,7 +31,7 @@ The next session is scheduled for `July 26, 2023` at `1:30pm ET`.
 | 3 | Design an API Specification | We created the requirements for our Blog API and started designing our API Spec. Finish your homework before the next session! More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-3-design-an-api-specification-2a315899f22f). | [Full video (1h16m)](https://www.twitch.tv/videos/1846281214) | [Edited video (42min)](https://youtu.be/XIrCqwmTPQs)
 | 4 | Test & Publish the API Spec | We tested the API Specification using the mocking service in Design Center and adjusted a few things we had to change. Then, we published the API Spec to Exchange. Finally, we created a new Mule project from the published asset. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-4-test-publish-the-api-specification-7dcca81e0b07). | [Full video (1h10m)](https://www.twitch.tv/videos/1858212063) | [Edited video (27min)](https://youtu.be/ho5GQJD8Hxo)
 | 5 | Develop the API in Anypoint Studio | We created a new Mule project with the scaffolded flows from the published API specification and started our API implementation / development. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-5-develop-the-api-in-anypoint-studio-a7dcfc43655c). | [Full video (1h19m)](https://www.twitch.tv/videos/1864154096) | [Edited video (37m)](https://youtu.be/K9ntwKz9vds)
-| 6 | Debug the Mule App in Anypoint Studio | We reviewed how to implement the articles logic, created a Postman collection with its local+dev environments, and learned how to debug our Mule application. | [Full video (1h)](https://www.twitch.tv/videos/1876220306) | Edited video tbd
+| 6 | Debug the Mule App in Anypoint Studio | We reviewed how to implement the articles logic, created a Postman collection with its local+dev environments, and learned how to debug our Mule application. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-6-debug-the-mule-app-in-anypoint-studio-ab7602d5b788). | [Full video (1h)](https://www.twitch.tv/videos/1876220306) | [Edited video (39m)](https://youtu.be/75IJ1WFa9iA)
 
 ---
 
@@ -416,7 +416,8 @@ Finish creating the rest of the requests in Postman from our API specification.
 <details>
 <summary>Alex's homework solution</summary>
 
-tbd before the next session
+- Created the rest of the requests in Postman.
+- You can see the full list of changes I did for this homework in [Pull Request #3](https://github.com/alexandramartinez/mulesoft-from-start/pull/3/files).
 
 </details>
 
