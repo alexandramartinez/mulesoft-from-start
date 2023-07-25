@@ -423,8 +423,7 @@ Finish creating the rest of the requests in Postman from our API specification.
 
 </br>
 
-> **Note**
->
+> **Note**\
 > I worked on some improvements to the code's implementation before session 7. These changes were not included as session 6's homework and that's why I did not add them as part of that pull request. You can see all the improvements I did on commit [60a9813](https://github.com/alexandramartinez/mulesoft-from-start/commit/60a98133df750c094b54562db41ea7ab0ad3716d).
 
 ### ◻️ Session 7
