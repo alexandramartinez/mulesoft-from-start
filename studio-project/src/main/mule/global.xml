@@ -3,7 +3,7 @@
     <http:listener-config name="maxines-blog-api-httpListenerConfig">
         <http:listener-connection host="${http.host}" port="${http.port}" />
     </http:listener-config>
-    <apikit:config name="maxines-blog-api-config" api="resource::25cebd62-2548-4351-8196-5a262e78e663:maxines-blog-api:1.0.2:raml:zip:maxines-blog-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="maxines-blog-api-config" api="resource::4ff8cd06-fff6-4ccb-8ac0-a74161c96108:maxines-blog-api:1.0.3:raml:zip:maxines-blog-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <global-property doc:name="Global Property" doc:id="88a33def-4655-439d-a5bd-e5d30b04bd57" name="env" value="local" />
     <configuration-properties doc:name="Configuration properties" doc:id="8a21399f-73af-4da1-bc58-3dc54676d6a5" file="${env}.properties" />
     <os:object-store name="Object_store" doc:name="Object store" doc:id="7a532520-e076-42ea-b5d9-7832f470b968" />

@@ -4,7 +4,7 @@
 
 	<groupId>com.mycompany</groupId>
 	<artifactId>maxines-blog</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.3</version>
 	<packaging>mule-application</packaging>
 
 	<name>maxines-blog</name>
@@ -29,6 +29,9 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
+				<configuration>
+					<classifier>---- select project type ----</classifier>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -59,9 +62,9 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>25cebd62-2548-4351-8196-5a262e78e663</groupId>
+			<groupId>4ff8cd06-fff6-4ccb-8ac0-a74161c96108</groupId>
 			<artifactId>maxines-blog-api</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.3</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
 		</dependency>
