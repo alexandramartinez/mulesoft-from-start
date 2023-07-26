@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd  http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+    <flow name="maxines-blog-api-main">
+        <http:listener config-ref="maxines-blog-api-httpListenerConfig" path="/api/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body><![CDATA[#[%dw 2.0
+output application/json
+var descriptions = {
+    "400": "There's something wrong with your request. Please review it before resending.",
+    "404": "This resource was not found or does not exist.",
+    "405": "The method you're using in your request is not allowed in this API.",
+    "406": "Not acceptable.",
+    "415": "Your request is on an unsupported media type. Please use JSON.",
+    "501": "This API does not support what you're trying to do!"
+}
+var httpStatus = vars.httpStatus as String
+---
+{
+	code: vars.httpStatus,
+	description: if (isEmpty(vars.errorDescription)) descriptions[httpStatus] else vars.errorDescription
+}]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:router config-ref="maxines-blog-api-config" />
+        <error-handler>
+            <on-error-propagate type="APIKIT:BAD_REQUEST">
+                <set-variable value="#[400]" doc:name="httpStatus 400" doc:id="24702fe0-de9c-4767-9a34-bcd641aa197f" variableName="httpStatus"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_FOUND">
+                <set-variable value="#[404]" doc:name="httpStatus 404" doc:id="59ccc86c-b64e-4b5e-9271-90e81c848f09" variableName="httpStatus"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:METHOD_NOT_ALLOWED">
+                <set-variable value="#[405]" doc:name="httpStatus 405" doc:id="25385331-662b-4191-8601-a06c53a44924" variableName="httpStatus"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_ACCEPTABLE">
+                <set-variable value="#[406]" doc:name="httpStatus 406" doc:id="051751f1-2c6a-4b67-b958-93e9450e2e35" variableName="httpStatus"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+                <set-variable value="#[415]" doc:name="httpStatus 415" doc:id="8d525eff-ec3b-49c3-b98f-5ae0b67a7ff9" variableName="httpStatus"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_IMPLEMENTED">
+                <set-variable value="#[501]" doc:name="httpStatus 501" doc:id="ae28fc56-ff91-4e63-9c9f-4c7580202f3e" variableName="httpStatus"/>
+            </on-error-propagate>
+        </error-handler>
+    </flow>
+    <flow name="put:\articles\(articleId):application\json:maxines-blog-api-config">
+        <flow-ref doc:name="update one article" doc:id="c9ce24c0-503d-44ae-a1a7-f096383be773" name="resources-articles:update-one-article"/>
+    </flow>
+    <flow name="put:\articles\(articleId)\comments\(commentId):application\json:maxines-blog-api-config">
+        <flow-ref doc:name="update one comment from an article" doc:id="9d7ff7ec-2c1a-4923-865c-09c774f860ee" name="resources-comments:update-one-comment-from-an-article"/>
+    </flow>
+    <flow name="put:\writers\(writerId):application\json:maxines-blog-api-config">
+        <flow-ref doc:name="update one writer" doc:id="ba516463-ed27-4624-8240-5bef17f5a216" name="resources-writers:update-one-writer"/>
+    </flow>
+    <flow name="delete:\articles\(articleId):maxines-blog-api-config">
+        <flow-ref doc:name="delete one article" doc:id="5737bc13-e19d-46e5-9711-3b55413cd682" name="resources-articles:delete-one-article"/>
+    </flow>
+    <flow name="delete:\articles\(articleId)\comments\(commentId):maxines-blog-api-config">
+        <flow-ref doc:name="delete one comment from an article" doc:id="b7adcb4d-1b1f-48c3-840d-2b2c7e6ec2eb" name="resources-comments:delete-one-comment-from-an-article"/>
+    </flow>
+    <flow name="delete:\writers\(writerId):maxines-blog-api-config">
+        <flow-ref doc:name="delete one writer" doc:id="e7979ba2-047d-432c-bc0e-699fe5d806be" name="resources-writers:delete-one-writer"/>
+    </flow>
+    <flow name="get:\categories:maxines-blog-api-config">
+        <flow-ref doc:name="read categories" doc:id="b45f67fe-b9f5-41ea-afe0-5261b9772aa0" name="resources-categories:read-categories"/>
+    </flow>
+    <flow name="get:\articles:maxines-blog-api-config">
+        <flow-ref doc:name="read all articles" doc:id="b4e85e5b-af6a-4f96-94f6-3cd5fc671580" name="resources-articles:read-all-articles"/>
+    </flow>
+    <flow name="get:\articles\(articleId)\comments:maxines-blog-api-config">
+        <flow-ref doc:name="read all comments from an article" doc:id="153c9bbb-886e-4324-bf6c-3a3908c76289" name="resources-comments:read-all-comments-from-an-article"/>
+    </flow>
+    <flow name="get:\writers:maxines-blog-api-config">
+		<flow-ref doc:name="read all writers" doc:id="bc9cff90-90f0-4a8a-ba4f-22cddf206039" name="resources-writers:read-all-writers"/>
+    </flow>
+    <flow name="get:\articles\(articleId):maxines-blog-api-config">
+        <flow-ref doc:name="read one article" doc:id="42a75635-84c0-4c1e-8f47-7ea2c9daa2e7" name="resources-articles:read-one-article"/>
+    </flow>
+    <flow name="get:\articles\(articleId)\comments\(commentId):maxines-blog-api-config">
+        <flow-ref doc:name="read one comment from an article" doc:id="aa9248b5-417f-4c5c-92d4-87b8f60f3aa0" name="resources-comments:read-one-comment-from-an-article"/>
+    </flow>
+    <flow name="get:\writers\(writerId):maxines-blog-api-config">
+        <flow-ref doc:name="read one writer" doc:id="ba449337-9697-4e69-b21d-0a25f8abf361" name="resources-writers:read-one-writer"/>
+    </flow>
+    <flow name="post:\articles:application\json:maxines-blog-api-config">
+        <flow-ref doc:name="create one article" doc:id="792952ad-33ac-4238-bdc2-0c2d2099b070" name="resources-articles:create-one-article"/>
+    </flow>
+    <flow name="post:\articles\(articleId)\comments:application\json:maxines-blog-api-config">
+        <flow-ref doc:name="create one comment in an article" doc:id="573bc752-b8da-482d-8497-809da199572e" name="resources-comments:create-one-comment-in-an-article"/>
+    </flow>
+    <flow name="post:\writers:application\json:maxines-blog-api-config">
+		<flow-ref doc:name="create one writer" doc:id="6cbff407-3715-4683-8343-03496636c5e6" name="resources-writers:create-one-writer"/>
+    </flow>
+    <flow name="delete:\categories:application\json:maxines-blog-api-config">
+		<flow-ref doc:name="delete categories" doc:id="41e4801c-d67e-4c30-a441-84af03a7dc2d" name="resources-categories:delete-categories"/>
+    </flow>
+    <flow name="post:\categories:application\json:maxines-blog-api-config">
+		<flow-ref doc:name="create or update categories" doc:id="86547df6-5091-4dff-8970-52199feab48c" name="resources-categories:create-or-update-categories"/>
+    </flow>
+</mule>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="common:check-404" doc:id="9451f4ad-fe7d-41fd-89e1-8f7196cd3ad7" >
+		<choice doc:name="Choice" doc:id="cd4ee036-ab1d-45d9-8ea1-d5193584fbb7" >
+			<when expression="#[isEmpty(payload)]">
+				<set-variable value="#[404]" doc:name="httpStatus = 404" doc:id="5b50dbbe-60fd-4fd8-9bfa-144993bcb40a" variableName="httpStatus"/>
+				<set-variable value="The ID you're using to retrieve information does not exist. Try a different ID!" doc:name="errorDescription" doc:id="5ecc9556-e2c6-4d31-b009-af34f3cc3122" variableName="errorDescription"/>
+				<raise-error doc:name="NOT_FOUND" doc:id="9bdd8be6-dbff-4133-8f9d-d0fbe222e839" type="CUSTOM:NOT_FOUND"/>
+			</when>
+			<otherwise >
+				<logger level="INFO" doc:name="Logger" doc:id="f5e5f2df-c89d-4e88-b120-74cba9ff490d" message="Not an empty payload"/>
+			</otherwise>
+		</choice>
+	</sub-flow>
+</mule>
