@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+	<sub-flow name="resources-categories:retrieve-categories" doc:id="32eb4759-15fb-4158-8c33-62549c3f7c4c" >
+		<os:retrieve doc:name="categories" doc:id="9103c1ab-d956-4a60-afb6-3d1d6ae2d502" key="#[Mule::p('os.categories')]" objectStore="Object_store" target="categories" >
+			<os:default-value ><![CDATA[#[output application/json --- []]]]></os:default-value>
+		</os:retrieve>
+	</sub-flow>
+	<sub-flow name="resources-categories:store-categories" doc:id="b47c3235-6894-4481-b2df-2a1ee04b475b" >
+		<os:store doc:name="categories" doc:id="ff9b2825-8d25-43c3-978a-c26c228a858d" key="#[Mule::p('os.categories')]" objectStore="Object_store" />
+	</sub-flow>
+	<sub-flow name="resources-categories:read-categories" doc:id="b26e5333-1761-4083-ae86-62f258596f1d" >
+		<logger level="INFO" doc:name="START" doc:id="810f56e7-3384-4e10-8350-8d3f68e0c62a" message="Starting resources-categories:read-categories" />
+		<ee:transform doc:name="categoryName" doc:id="942e8ea2-b0d1-4191-8fb6-86639455d380" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="categoryName" ><![CDATA[%dw 2.0
+output application/json
+---
+attributes.queryParams.categoryName default ""]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<flow-ref doc:name="retrieve categories" doc:id="9a93003f-4e57-4fb7-a041-645e6bfe53b4" name="resources-categories:retrieve-categories"/>
+		<ee:transform doc:name="return filtered payload" doc:id="a4b1a08d-c521-49b0-861f-36c87e20b492" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+if (isEmpty(vars.categoryName)) vars.categories
+else vars.categories filter (lower($) contains lower(vars.categoryName))]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="END" doc:id="7e4c9f37-0828-4bf2-9449-1fa232aae627" message="Ending resources-categories:read-categories" />
+	</sub-flow>
+	<sub-flow name="resources-categories:create-or-update-categories" doc:id="427c1b69-c008-40bb-be5a-81ca0c2dcca2" >
+		<logger level="INFO" doc:name="START" doc:id="0c523175-c849-48b4-a792-9a1df5f83c79" message="Starting resources-categories:create-or-update-categories" />
+		<flow-ref doc:name="retrieve categories" doc:id="42e5484f-fe0c-412f-bede-3246b17e7485" name="resources-categories:retrieve-categories" />
+		<ee:transform doc:name="update categories" doc:id="1cad2a01-cb4d-4b78-a8a6-ca5b7b6d0b64" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+(vars.categories ++ payload) distinctBy $]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<flow-ref doc:name="store categories" doc:id="50b30658-0546-48d4-8821-5b3b6cde73b8" name="resources-categories:store-categories"/>
+		<logger level="INFO" doc:name="END" doc:id="b40438ca-e01a-4dcd-949c-06c5b663b9cd" message="Ending resources-categories:create-or-update-categories" />
+	</sub-flow>
+	<sub-flow name="resources-categories:delete-categories" doc:id="042195a4-3ea0-4e90-b9b8-31657ea7e522" >
+		<logger level="INFO" doc:name="START" doc:id="b0d885ab-590f-4d7e-949b-01b80f01a9c3" message="Starting resources-categories:delete-categories" />
+		<flow-ref doc:name="retrieve categories" doc:id="915c20b6-b6bf-4ec1-be3c-a87e0a564491" name="resources-categories:retrieve-categories" />
+		<ee:transform doc:name="update categories" doc:id="aaba3251-79d1-4b6b-9047-c5f3baedab54">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+vars.categories -- payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<flow-ref doc:name="store categories" doc:id="97cfed01-88ad-4b9a-b359-953f6d0362ff" name="resources-categories:store-categories" />
+		<logger level="INFO" doc:name="END" doc:id="5d929cdb-2a9f-44d4-85a7-26d76962ecac" message="Ending resources-categories:delete-categories" />
+	</sub-flow>
+</mule>
