@@ -429,6 +429,9 @@ Finish creating the rest of the requests in Postman from our API specification.
 <details>
 <summary>Deploy the Mule App to CloudHub</summary>
 
+- Since my past Anypoint Platform account had already expired, I had to create a new API Specification in the new account and publish to Exchange
+  - For this to be updated in the Mule app, I had to modify the `pom.xml` and the `global.xml` files to reflect the new asset
+  - See the changes we did to the repo in this session: [Pull Request #4](https://github.com/alexandramartinez/mulesoft-from-start/pull/4/files)
 - We learned how to deploy the Mule app to CloudHub manually from Anypoint Studio
 - We learned the UI of Runtime Manager
 
@@ -436,7 +439,7 @@ Finish creating the rest of the requests in Postman from our API specification.
 
 ### ◻️ Session 8
 
-- API Manager
+- API Manager (Autodiscovery)
 - CI/CD with GitHub Actions
     - Maven
     - Secured/encrypted properties
