@@ -1,0 +1,469 @@
+{
+	"info": {
+		"_postman_id": "b80df300-f9f7-4680-add2-1f1c974a67d6",
+		"name": "mulesoft-from-start",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28608251"
+	},
+	"item": [
+		{
+			"name": "articles",
+			"item": [
+				{
+					"name": "GET /articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/articles",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /articles",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 3,\n    \"title\": \"The Importance of Regular Exercise\",\n    \"content\": \"Lorem \",\n    \"writer\": {\n        \"id\": 1,\n        \"name\": \"Esmeralda\",\n        \"bio\": \"20+ years of experience in IT and very smart.\"\n    },\n    \"category\": \"Exercise\",\n    \"comments\": [\n        {\n            \"id\": 1,\n            \"content\": \"Hey, this was a nice post!\",\n            \"author\": \"Alex Martinez\"\n        }\n    ],\n    \"slug\": \"importance-of-regular-exercise\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/articles",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /articles/{articleId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/articles/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /articles/{articleId}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 5,\n    \"title\": \"The Importance of Regular eeeee\",\n    \"content\": \"Lorem \",\n    \"writer\": {\n        \"id\": 1,\n        \"name\": \"Esmeralda\",\n        \"bio\": \"20+ years of experience in IT and very smart.\"\n    },\n    \"category\": \"Example\",\n    \"comments\": [\n        {\n            \"id\": 1,\n            \"content\": \"Hey, this was a nice post!\",\n            \"author\": \"Alex Martinez\"\n        }\n    ],\n    \"slug\": \"importance-of-regular-exercise\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/articles/8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /articles/{articleId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/articles/5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "GET /.../comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/articles/1/comments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /.../comments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"content\": \"Hey, this was a nice post!\",\n    \"author\": \"Alex Martinez\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/articles/1/comments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /.../comments/{commentId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/articles/1/comments/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles",
+								"1",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /.../comments/{commentId}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"content\": \"Hey, this was a nice post!\",\n    \"author\": \"Alex Martinez\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/articles/1/comments/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles",
+								"1",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /.../comments/{commentId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/articles/1/comments/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"articles",
+								"1",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "writers",
+			"item": [
+				{
+					"name": "GET /writers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/writers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"writers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /writers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"Esmeralda\",\n    \"bio\": \"20+ years of experience in IT and very smart.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/writers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"writers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /writers/{writerId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/writers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"writers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /writers/{writerId}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"Esmeralda\",\n    \"bio\": \"20+ years of experience in IT and very smart.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/writers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"writers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /writers/{writerId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/writers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"writers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "GET /categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "categoryName",
+									"value": "dataweave",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /categories",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    \"DataWeave\"\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /categories",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    \"DataWeave\"\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "foo1",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "bar1",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
