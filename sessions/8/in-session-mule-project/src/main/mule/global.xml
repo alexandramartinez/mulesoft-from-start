@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd  http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+    <http:listener-config name="maxines-blog-api-httpListenerConfig">
+        <http:listener-connection host="${http.host}" port="${http.port}" />
+    </http:listener-config>
+    <apikit:config name="maxines-blog-api-config" api="resource::4ff8cd06-fff6-4ccb-8ac0-a74161c96108:maxines-blog-api:1.0.3:raml:zip:maxines-blog-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <global-property doc:name="Global Property" doc:id="88a33def-4655-439d-a5bd-e5d30b04bd57" name="env" value="local" />
+    <configuration-properties doc:name="Configuration properties" doc:id="8a21399f-73af-4da1-bc58-3dc54676d6a5" file="${env}.properties" />
+    <os:object-store name="Object_store" doc:name="Object store" doc:id="7a532520-e076-42ea-b5d9-7832f470b968" />
+    <configuration-properties doc:name="Configuration properties" doc:id="b3504d8f-cec4-437a-9420-80c0d2f1caf9" file="default.properties" />
+	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="4a8688cf-8300-4d50-bb79-693642db3e11" flowRef="maxines-blog-api-main" />
+</mule>
