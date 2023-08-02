@@ -443,6 +443,7 @@ Finish creating the rest of the requests in Postman from our API specification.
 <details>
 <summary>Set up CI/CD & API Autodiscovery</summary>
 
+- See the changes we did to the repo in this session: [Pull Request #5](https://github.com/alexandramartinez/mulesoft-from-start/pull/5/files)
 - Step 1: Retrieve your Anypoint Platform credentials:
   - Access Management > Business Groups > select your business group > Environments > Sandbox (or your environment)
   - Here you can retrieve your Client ID and Client Secret, which we'll refer to as:
