@@ -33,7 +33,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 3,\n    \"title\": \"The Importance of Regular Exercise\",\n    \"content\": \"Lorem \",\n    \"writer\": {\n        \"id\": 1,\n        \"name\": \"Esmeralda\",\n        \"bio\": \"20+ years of experience in IT and very smart.\"\n    },\n    \"category\": \"Example\",\n    \"comments\": [\n        {\n            \"id\": 1,\n            \"content\": \"Hey, this was a nice post!\",\n            \"author\": \"Alex Martinez\"\n        }\n    ],\n    \"slug\": \"importance-of-regular-exercise\"\n}",
+							"raw": "{\n    \"id\": 3,\n    \"title\": \"The Importance of Regular Exercise\",\n    \"content\": \"Lorem \",\n    \"writer\": {\n        \"id\": 1,\n        \"name\": \"Esmeralda\",\n        \"bio\": \"20+ years of experience in IT and very smart.\"\n    },\n    \"category\": \"Exercise\",\n    \"comments\": [\n        {\n            \"id\": 1,\n            \"content\": \"Hey, this was a nice post!\",\n            \"author\": \"Alex Martinez\"\n        }\n    ],\n    \"slug\": \"importance-of-regular-exercise\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -103,13 +103,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/articles/8",
+							"raw": "{{host}}/articles/5",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"articles",
-								"8"
+								"5"
 							]
 						}
 					},
@@ -368,7 +368,7 @@
 							"query": [
 								{
 									"key": "categoryName",
-									"value": "MuleSoft",
+									"value": "dataweave",
 									"disabled": true
 								}
 							]
@@ -429,6 +429,41 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "foo1",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "bar1",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
