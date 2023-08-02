@@ -9,12 +9,12 @@ Everything discussed in the Twitch live sessions for MuleSoft beginners.
 
 ## 🗓️ Next session
 
-The next session is scheduled for `Aug 2, 2023` at `1:30pm ET`.
+The next session is scheduled for `Aug 9, 2023` at `1:30pm ET`.
 
-- API Manager
-- CI/CD with GitHub Actions
-    - Maven
-    - Secured/encrypted properties
+- MUnit manually
+- MUnit CI/CD
+- Postman
+- Mention BAT CLI
 
 ---
 
@@ -30,6 +30,7 @@ The next session is scheduled for `Aug 2, 2023` at `1:30pm ET`.
 | 5 | Develop the API in Anypoint Studio | We created a new Mule project with the scaffolded flows from the published API specification and started our API implementation / development. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-5-develop-the-api-in-anypoint-studio-a7dcfc43655c). | [Full video (1h19m)](https://www.twitch.tv/videos/1864154096) | [Edited video (37m)](https://youtu.be/K9ntwKz9vds)
 | 6 | Debug the Mule App in Anypoint Studio | We reviewed how to implement the articles logic, created a Postman collection with its local+dev environments, and learned how to debug our Mule application. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-6-debug-the-mule-app-in-anypoint-studio-ab7602d5b788). | [Full video (1h)](https://www.twitch.tv/videos/1876220306) | [Edited video (39m)](https://youtu.be/75IJ1WFa9iA)
 | 7 | Deploy the Mule App to CloudHub (Runtime Manager) | We confirmed the API works locally, so we deployed it to CloudHub (located in Runtime Manager) to test it in the dev environment. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-7-deploy-the-mule-app-to-cloudhub-363fc1239b3). | - [Part 1 Full video (18m)](https://www.twitch.tv/videos/1882370337) - [Part 2 Full video (1h2m)](https://www.twitch.tv/videos/1882370336) | [Edited video (14m)](https://youtu.be/SUwnqoq8ZbI)
+| 8 | Set up CI/CD & API Autodiscovery (API Manager) | We connected our Mule app from Runtime Manager to our API in API Manager to apply security policies using API Autodiscovery. We learned how to apply CI/CD pipelines to our local project and how to do them using GitHub Actions. | [Full video (1h15m)](https://www.twitch.tv/videos/1888369792) | Edited video tbd
 
 ---
 
@@ -437,12 +438,104 @@ Finish creating the rest of the requests in Postman from our API specification.
 
 </details>
 
-### ◻️ Session 8
+### ✅ Session 8
 
-- API Manager (Autodiscovery)
-- CI/CD with GitHub Actions
-    - Maven
-    - Secured/encrypted properties
+<details>
+<summary>Set up CI/CD & API Autodiscovery</summary>
+
+- Step 1: Retrieve your Anypoint Platform credentials:
+  - Access Management > Business Groups > select your business group > Environments > Sandbox (or your environment)
+  - Here you can retrieve your Client ID and Client Secret, which we'll refer to as:
+    - `ap.client.id` & `ap.client.secret` from the Maven command
+    - `anypoint.platform.client_id` & `anypoint.platform.client_secret` from the Mule app's properties
+- Step 2: Retrieve your Connected App's credentials:
+  - Access Management > Connected Apps > Create app > App acts on it's own behalf
+  - Scopes:
+    - Design Center Developer
+    - View Environment
+    - View Organization
+    - Profile
+    - Cloudhub Organization Admin
+    - Create Applications
+    - Delete Applications
+    - Download Applications
+    - Read Applications
+    - Read Servers
+  - Retrieve Client ID and Client Secret, which we'll refer to as:
+    - `CONNECTED_APP_CLIENT_ID` & `CONNECTED_APP_CLIENT_SECRET` from GitHub Actions secrets
+    - `connectedapp.client.id` & `connectedapp.client.secret` from the Maven command
+- Step 3: Modify your `pom.xml`:
+
+```xml
+<plugin>
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>mule-maven-plugin</artifactId>
+    <version>${mule.maven.plugin.version}</version>
+    <extensions>true</extensions>
+    <!-- Deployment config start -->
+    <configuration>
+        <cloudHubDeployment>
+            <uri>https://anypoint.mulesoft.com</uri>
+            <muleVersion>4.4.0</muleVersion>
+            <applicationName>maxines-blog</applicationName>
+            <environment>Sandbox</environment>
+            <workerType>MICRO</workerType>
+            <region>us-east-2</region>
+            <workers>1</workers>
+            <objectStoreV2>true</objectStoreV2>
+            <connectedAppClientId>${connectedapp.client.id}</connectedAppClientId>
+            <connectedAppClientSecret>${connectedapp.client.secret}</connectedAppClientSecret>
+            <connectedAppGrantType>client_credentials</connectedAppGrantType>
+            <properties>
+                <env>dev</env>
+                <anypoint.platform.client_id>${ap.client.id}</anypoint.platform.client_id>
+                <anypoint.platform.client_secret>${ap.client.secret}</anypoint.platform.client_secret>
+            </properties>
+        </cloudHubDeployment>
+    </configuration>
+    <!-- Deployment config end -->
+</plugin>
+```
+
+- Step 4: If you want to set it up with GitHub Actions, you can follow [this quick reference](https://dev.to/devalexmartinez/quick-reference-cicd-for-a-mule-app-using-a-connected-app-jlj)
+  - Make sure you add the actual credentials to the GitHub secrets in Settings > Secrets and variables > Actions > New repository secret
+    - `CONNECTED_APP_CLIENT_ID`
+    - `CONNECTED_APP_CLIENT_SECRET`
+    - `ANYPOINT_PLATFORM_CLIENT_ID`
+    - `ANYPOINT_PLATFORM_CLIENT_SECRET`
+  - And make sure you modify the maven command to include all 4 credentials. Like so:
+
+```sh
+mvn deploy -DskipMunitTests -DmuleDeploy \
+-Dmule.artifact=$artifactName \
+-Dconnectedapp.client.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
+-Dconnectedapp.client.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
+-Dap.client.id="${{ secrets.ANYPOINT_PLATFORM_CLIENT_ID }}" \
+-Dap.client.secret="${{ secrets.ANYPOINT_PLATFORM_CLIENT_SECRET }}"
+```
+
+- Step 5: If you want to test this locally (as we did on the session), you just have to run the Maven command in your Terminal with your actual credentials. Like so:
+
+```sh
+mvn deploy -DskipMunitTests -DmuleDeploy \
+ -Dconnectedapp.client.id="ae0bd2e7fd154c3adf1cc934543a07e" \
+ -Dconnectedapp.client.secret="2Da6676dad64640B265D9Cc35830478" \
+ -Dap.client.id="5e09b8bf52394797b5035978b74aee1" \
+ -Dap.client.secret="D4dD12915E3D29d9aB436AA0849c519"
+```
+
+</details>
+
+<details>
+<summary>Links & Resources</summary>
+
+**Resources**
+
+- [Deploy Applications to CloudHub Using the Mule Maven Plugin](https://docs.mulesoft.com/mule-runtime/latest/deploy-to-cloudhub)
+- [Deploy Applications to CloudHub 2.0 Using the Mule Maven Plugin](https://docs.mulesoft.com/mule-runtime/latest/deploy-to-cloudhub-2)
+- [Quick reference: CI/CD for a Mule app using a Connected App](https://dev.to/devalexmartinez/quick-reference-cicd-for-a-mule-app-using-a-connected-app-jlj)
+
+</details>
 
 ### ◻️ Session 9
 
