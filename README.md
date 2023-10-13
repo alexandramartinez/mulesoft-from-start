@@ -539,6 +539,6 @@ mvn deploy -DskipMunitTests -DmuleDeploy \
 <details>
 <summary>Test your Mule app with MUnit</summary>
 
-Nothing here!
+- See the changes we did to the repo in this session: [Pull Request #6](https://github.com/alexandramartinez/mulesoft-from-start/pull/6/files)
 
 </details>
