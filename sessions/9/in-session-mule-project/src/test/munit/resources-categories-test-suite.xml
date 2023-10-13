@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="resources-categories-test-suite.xml" />
+	<munit:test name="resources-categories-test-suite:read-categories" doc:id="53bc6c75-f341-438c-b6cc-2be03de738f8" >
+		<munit:behavior >
+			<munit-tools:spy doc:name="categoryName Transform Message" doc:id="f7888d02-4b3d-48d6-95b2-a74e4aaacf07" processor="ee:transform">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="942e8ea2-b0d1-4191-8fb6-86639455d380" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:after-call >
+					<munit-tools:assert-equals doc:name="categoryName = Exercise" doc:id="d48ad16e-c148-4205-9c5d-c533d5ab4def" actual="#[vars.categoryName]" expected='#["Exercise"]'/>
+				</munit-tools:after-call>
+			</munit-tools:spy>
+			<munit-tools:mock-when doc:name="retrieve categories" doc:id="18eb674d-6c50-4f91-8f86-e35446c5477c" processor="os:retrieve">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="9103c1ab-d956-4a60-afb6-3d1d6ae2d502" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="categories" value='#[output application/json --- readUrl("classpath://categories/all-categories-array.json")]' mediaType="application/json" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set queryParam" doc:id="d8474535-8889-4add-a9ad-4aeb5afe4364" >
+				<munit:attributes value='#[output application/json&#10;---&#10;{&#10;	queryParams: {&#10;		categoryName: "Exercise"&#10;	}&#10;}]' />
+			</munit:set-event>
+			<flow-ref doc:name="resources-categories:read-categories" doc:id="e6e2d021-9857-4112-a8ca-9d689b738e6c" name="resources-categories:read-categories"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="payload" doc:id="76ea3a1f-d1e0-4fb3-930e-8630eaeedb34" actual="#[output application/json --- payload]" expected='#[output application/json&#10;---&#10;[&#10;    "Exercise"&#10;]]' />
+		</munit:validation>
+	</munit:test>
+
+</mule>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MUnit Coverage Report</title>
+    <link rel="stylesheet" type="text/css" href="./assets/styles/mulesoft-styles.css">
+    <link rel="stylesheet" type="text/css" href="./assets/styles/tsorter.css">
+</head>
+<body>
+<div class="mulesoft-topbar">
+    <div class="mulesoft-appbar">
+        <div class="muleicon muleicon-logo"></div>
+        <div class="anypoint-brand">MUnit Coverage Report - resources-categories.xml</div>
+    </div>
+</div>
+
+<div class="col-md-2 col-md-offset-1 sidemenu">
+    <ul class="sidemenu-back">
+        <li><a href="./summary.html">Resources</a></li>
+    </ul>
+</div>
+
+<div class="col-md-8">
+    <h2 class="text-bold">Resource Coverage - #Processors 6 / 17</h2>
+    <div class="progress">
+        <span>35.29%</span>
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="35.294" aria-valuemin="0"
+             aria-valuemax="100" style="width: 35.294%;">
+        </div>
+    </div>
+    <ul class="list-unstyled">
+        <li><h4><b>Required Resource Coverage :</b>
+            N/A
+        </h4></li>
+        <li><h4><b>Required Container Coverage :</b>
+            N/A
+        </h4></li>
+    </ul>
+    <h2 class="text-bold">Containers</h2>
+    <table id="resources_table" class="table table-featured table-hover sortable">
+        <thead>
+        <tr>
+            <th colspan="2">Name</th>
+            <th>Type</th>
+            <th data-tsorter="numeric">#Covered Processors</th>
+            <th data-tsorter="numeric">#Processors</th>
+            <th data-tsorter="coverage">Coverage*</th>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+        <tr>
+            <td colspan="2">resources-categories:delete-categories</td>
+            <td>Scope</td>
+            <td>0</td>
+            <td>5</td>
+            <td>
+                <div class="progress">
+                    <span>0%</span>
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">resources-categories:read-categories</td>
+            <td>Scope</td>
+            <td>5</td>
+            <td>5</td>
+            <td>
+                <div class="progress">
+                    <span>100%</span>
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">resources-categories:store-categories</td>
+            <td>Scope</td>
+            <td>0</td>
+            <td>1</td>
+            <td>
+                <div class="progress">
+                    <span>0%</span>
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">resources-categories:create-or-update-categories</td>
+            <td>Scope</td>
+            <td>0</td>
+            <td>5</td>
+            <td>
+                <div class="progress">
+                    <span>0%</span>
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">resources-categories:retrieve-categories</td>
+            <td>Scope</td>
+            <td>1</td>
+            <td>1</td>
+            <td>
+                <div class="progress">
+                    <span>100%</span>
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <table>
+            <tbody>
+            </tbody>
+        </table>
+
+        </tbody>
+    </table>
+    <h4>(*) Number of processors executed during test</h4>
+</div>
+<script type="text/javascript" src="./assets/js/tsorter.min.js"></script>
+<script type="text/javascript">
+    function init() {
+        var sorter = tsorter.create('resources_table', 0, {
+            coverage: function (row) {
+                var cov = this.getCell(row).childNodes[1].childNodes[3].attributes['aria-valuenow'].textContent;
+                return parseFloat(cov.substring(cov[0].length - 1), 10);
+            }
+        });
+    }
+
+    window.onload = init;
+
+</script>
+</body>
+</html>
