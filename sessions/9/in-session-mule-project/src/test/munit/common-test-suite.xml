@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="common-test-suite.xml" />
+	<munit:test name="common-test-suite:check-404-empty-payload" doc:id="168c3409-ecbd-453c-a218-1663d6776213" expectedErrorType="CUSTOM:NOT_FOUND">
+		<munit:execution >
+			<munit:set-null-payload doc:name="Set null payload" doc:id="8d8a232e-a985-4c6f-8fc3-5364e0547cc8" />
+			<flow-ref doc:name="common:check-404" doc:id="3e1f6505-9dcb-41e3-bb3b-c419c8a2b4ee" name="common:check-404"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="httpStatus = 404" doc:id="372b40f5-19f8-4e2e-ab8d-891f7156dc14" actual="#[vars.httpStatus]" expected="#[404]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="common-test-suite:check-404-NOT-empty-payload" doc:id="92352695-b5d7-4fbb-b75f-d2b751c92136" >
+		<munit:execution >
+			<set-payload value="I'M NOT EMPTY! &gt;:D" doc:name="Set Payload" doc:id="091f0721-46ae-42ac-b7e4-62b8836dd2b7" />
+			<flow-ref doc:name="common:check-40" doc:id="1e2ce9e7-73e8-42a7-b0ba-3d8a9c71b1ee" name="common:check-404" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="payload is not null" doc:id="892e394a-f620-41e2-8988-cc2d440b3709" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+</mule>
