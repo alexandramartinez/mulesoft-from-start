@@ -7,11 +7,9 @@ Everything discussed in the Twitch live sessions for MuleSoft beginners.
 
 ---
 
-## ⚠️ ANNOUNCEMENT ⚠️
+## WE DID IT!
 
-Video from session 8 has been uploaded!
-
-I will be uploading the last video someday in October.
+All edited videos have been published and updated in the links below!
 
 ---
 
@@ -28,7 +26,7 @@ I will be uploading the last video someday in October.
 | 6 | Debug the Mule App in Anypoint Studio | We reviewed how to implement the articles logic, created a Postman collection with its local+dev environments, and learned how to debug our Mule application. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-6-debug-the-mule-app-in-anypoint-studio-ab7602d5b788). | [Full video (1h)](https://www.twitch.tv/videos/1876220306) | [Edited video (39m)](https://youtu.be/75IJ1WFa9iA)
 | 7 | Deploy the Mule App to CloudHub (Runtime Manager) | We confirmed the API works locally, so we deployed it to CloudHub (located in Runtime Manager) to test it in the dev environment. More info [here](https://medium.com/another-integration-blog/mulesoft-from-start-a-beginners-guide-session-7-deploy-the-mule-app-to-cloudhub-363fc1239b3). | - [Part 1 Full video (18m)](https://www.twitch.tv/videos/1882370337) - [Part 2 Full video (1h2m)](https://www.twitch.tv/videos/1882370336) | [Edited video (14m)](https://youtu.be/SUwnqoq8ZbI)
 | 8 | Set up CI/CD & API Autodiscovery (API Manager) | We connected our Mule app from Runtime Manager to our API in API Manager to apply security policies using API Autodiscovery. We learned how to apply CI/CD pipelines to our local project and how to do them using GitHub Actions. | [Full video (1h15m)](https://www.twitch.tv/videos/1888369792) | [Edited video (27m)](https://youtu.be/OWfqLMPQMpE)
-| 9 | Test your Mule app with MUnit testing (manually from Anypoint Studio) | We created some MUnit tests for our Mule app's flows and ran them in Anypoint Studio to increase the MUnit coverage. | [Full video (1h16m)](https://www.twitch.tv/videos/1894432153) | Edited video tbd after Dreamforce - Sep/Oct
+| 9 | Test your Mule app with MUnit testing (manually from Anypoint Studio) | We created some MUnit tests for our Mule app's flows and ran them in Anypoint Studio to increase the MUnit coverage. | [Full video (1h16m)](https://www.twitch.tv/videos/1894432153) | [Edited video (58m)](https://youtu.be/PYOBr3I2rk0)
 
 ---
 
@@ -541,6 +539,6 @@ mvn deploy -DskipMunitTests -DmuleDeploy \
 <details>
 <summary>Test your Mule app with MUnit</summary>
 
-details to be added...
+Nothing here!
 
 </details>
